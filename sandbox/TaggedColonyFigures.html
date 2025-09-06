@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.39">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Natasha Bestrom">
+<meta name="dcterms.date" content="2025-09-05">
+
+<title>Tagged Colony Figures</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="TaggedColonyFigures_files/libs/clipboard/clipboard.min.js"></script>
+<script src="TaggedColonyFigures_files/libs/quarto-html/quarto.js"></script>
+<script src="TaggedColonyFigures_files/libs/quarto-html/popper.min.js"></script>
+<script src="TaggedColonyFigures_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="TaggedColonyFigures_files/libs/quarto-html/anchor.min.js"></script>
+<link href="TaggedColonyFigures_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="TaggedColonyFigures_files/libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="TaggedColonyFigures_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="TaggedColonyFigures_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="TaggedColonyFigures_files/libs/bootstrap/bootstrap-973236bd072d72a04ee9cd82dcc9cb29.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#libraries" id="toc-libraries" class="nav-link active" data-scroll-target="#libraries"><span class="header-section-number">1</span> Libraries</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="header-section-number">2</span> Data</a></li>
+  <li><a href="#creating-the-metrics" id="toc-creating-the-metrics" class="nav-link" data-scroll-target="#creating-the-metrics"><span class="header-section-number">3</span> Creating the Metrics</a>
+  <ul>
+  <li><a href="#size" id="toc-size" class="nav-link" data-scroll-target="#size"><span class="header-section-number">3.1</span> Size</a></li>
+  <li><a href="#percent-of-living-tissue" id="toc-percent-of-living-tissue" class="nav-link" data-scroll-target="#percent-of-living-tissue"><span class="header-section-number">3.2</span> Percent of Living Tissue</a></li>
+  <li><a href="#lai--live-area-index" id="toc-lai--live-area-index" class="nav-link" data-scroll-target="#lai--live-area-index"><span class="header-section-number">3.3</span> LAI- Live Area Index</a></li>
+  </ul></li>
+  <li><a href="#summarizing-the-data" id="toc-summarizing-the-data" class="nav-link" data-scroll-target="#summarizing-the-data"><span class="header-section-number">4</span> Summarizing the Data</a>
+  <ul>
+  <li><a href="#dealing-with-dates" id="toc-dealing-with-dates" class="nav-link" data-scroll-target="#dealing-with-dates"><span class="header-section-number">4.1</span> Dealing with Dates</a></li>
+  <li><a href="#creating-the-averaged-data" id="toc-creating-the-averaged-data" class="nav-link" data-scroll-target="#creating-the-averaged-data"><span class="header-section-number">4.2</span> Creating the Averaged Data</a></li>
+  <li><a href="#creating-the-frequency-data" id="toc-creating-the-frequency-data" class="nav-link" data-scroll-target="#creating-the-frequency-data"><span class="header-section-number">4.3</span> Creating the Frequency Data</a>
+  <ul class="collapse">
+  <li><a href="#wide-dataset-with-nas-replaced-with-zeros" id="toc-wide-dataset-with-nas-replaced-with-zeros" class="nav-link" data-scroll-target="#wide-dataset-with-nas-replaced-with-zeros"><span class="header-section-number">4.3.1</span> Wide Dataset with NAs Replaced with Zeros</a></li>
+  <li><a href="#relative-proportions" id="toc-relative-proportions" class="nav-link" data-scroll-target="#relative-proportions"><span class="header-section-number">4.3.2</span> Relative Proportions</a></li>
+  <li><a href="#long-dataset" id="toc-long-dataset" class="nav-link" data-scroll-target="#long-dataset"><span class="header-section-number">4.3.3</span> Long Dataset</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#figures" id="toc-figures" class="nav-link" data-scroll-target="#figures"><span class="header-section-number">5</span> Figures</a>
+  <ul>
+  <li><a href="#lai" id="toc-lai" class="nav-link" data-scroll-target="#lai"><span class="header-section-number">5.1</span> LAI</a></li>
+  <li><a href="#percent-living-tissue" id="toc-percent-living-tissue" class="nav-link" data-scroll-target="#percent-living-tissue"><span class="header-section-number">5.2</span> Percent Living Tissue</a></li>
+  <li><a href="#size-1" id="toc-size-1" class="nav-link" data-scroll-target="#size-1"><span class="header-section-number">5.3</span> Size</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Tagged Colony Figures</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Natasha Bestrom </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 5, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="libraries" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="libraries"><span class="header-section-number">1</span> Libraries</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(writexl)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forcats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="data" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="data"><span class="header-section-number">2</span> Data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>TaggedColonies <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"AR_Data/TaggedColonies.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="creating-the-metrics" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="creating-the-metrics"><span class="header-section-number">3</span> Creating the Metrics</h2>
+<p>We will be calculating that looking to display data on the following metrics at the colony level for each site:</p>
+<ol type="1">
+<li><p>Size</p>
+<ul>
+<li><p>Length x Width x Height</p></li>
+<li><p>m<sup>3</sup></p></li>
+<li><p>need to convert measurements from cm to m</p></li>
+<li><p>Binned to match Muller et al.&nbsp;2014</p></li>
+</ul></li>
+<li><p>Percent of Living Tissue</p>
+<ul>
+<li>need to make this a proportion vs a whole number</li>
+</ul></li>
+<li><p>LAI (Live Area Index)</p>
+<ul>
+<li><p>Living ellipsoidal area</p></li>
+<li><p>m2</p></li>
+<li><p>need to convert measurements from cm to m</p></li>
+<li><p><span class="math inline">\(LAI= ((length (m) * width (m)* height (m))/3)^2 * Percent ofLiving Tissue\)</span></p></li>
+</ul></li>
+</ol>
+<section id="size" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="size"><span class="header-section-number">3.1</span> Size</h3>
+<p>For the size metric, we will convert the current measurements from cm to m, create the 3-dimensional size, and then bin the sizes.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Tagged_Metrics <span class="ot">&lt;-</span> TaggedColonies <span class="sc">%&gt;%</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Length =</span> Length<span class="sc">/</span><span class="dv">100</span>, <span class="at">Width =</span> Width<span class="sc">/</span><span class="dv">100</span>, <span class="at">Height =</span> Height<span class="sc">/</span><span class="dv">100</span>) <span class="sc">%&gt;%</span> <span class="co"># converting cm to m</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Structure =</span> Length <span class="sc">*</span> Width <span class="sc">*</span> Height) <span class="sc">%&gt;%</span> <span class="co"># creating the m^3</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Bin=</span> <span class="fu">ifelse</span>(Structure <span class="sc">==</span> <span class="dv">0</span>, <span class="st">"Bin_0"</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">ifelse</span>(Structure<span class="sc">&gt;</span><span class="dv">0</span> <span class="sc">&amp;</span> Structure<span class="sc">&lt;=</span><span class="fl">0.001</span>,<span class="st">"Bin_1"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">ifelse</span>(Structure<span class="sc">&gt;</span><span class="fl">0.001</span> <span class="sc">&amp;</span> Structure<span class="sc">&lt;=</span><span class="fl">0.125</span>, <span class="st">"Bin_2"</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">ifelse</span>(Structure<span class="sc">&gt;</span><span class="fl">0.125</span> <span class="sc">&amp;</span> Structure<span class="sc">&lt;=</span><span class="dv">1</span>,<span class="st">"Bin_3"</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                                  <span class="fu">ifelse</span>(Structure<span class="sc">&gt;</span><span class="dv">1</span>,<span class="st">"Bin_4"</span>,<span class="cn">NA</span>)))))) <span class="co"># Binning the data to the correct size bins</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="percent-of-living-tissue" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="percent-of-living-tissue"><span class="header-section-number">3.2</span> Percent of Living Tissue</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Tagged_Metrics <span class="ot">&lt;-</span> Tagged_Metrics <span class="sc">%&gt;%</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Per_Live =</span> Per_Live<span class="sc">/</span><span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="lai--live-area-index" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="lai--live-area-index"><span class="header-section-number">3.3</span> LAI- Live Area Index</h3>
+<p>For the LAI metric, we will convert the measurements from cm to m, create the surface area metric (m2), and then multiply it by the percent living.</p>
+<p><span class="math inline">\(LAI=((length(m)∗width(m)∗height(m))/3)2∗PercentofLivingTissue\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Tagged_Metrics <span class="ot">&lt;-</span> Tagged_Metrics <span class="sc">%&gt;%</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">SurfaceArea =</span> ((Length<span class="sc">*</span>Width<span class="sc">*</span>Height)<span class="sc">/</span><span class="dv">3</span>)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="co"># creating the surface area metric (m^2)</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">LAI =</span> SurfaceArea <span class="sc">*</span> Per_Live)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="summarizing-the-data" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="summarizing-the-data"><span class="header-section-number">4</span> Summarizing the Data</h2>
+<p>We are going to look at the data as the colony average by site across time. Most sites have a total of 36 colonies, while Reef Bay has only 35.</p>
+<section id="dealing-with-dates" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="dealing-with-dates"><span class="header-section-number">4.1</span> Dealing with Dates</h3>
+<p>Due to the nature of our sampling and weather, we were not always able to perform our surveys at each site on the same date. Thus, we need to select the date for each site and timepoint where the most surveys occurred.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Tagged_Metrics <span class="ot">&lt;-</span> Tagged_Metrics <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">DATE =</span> <span class="fu">ymd</span>(DATE)) <span class="sc">%&gt;%</span> <span class="co">#converting the date column to a date class</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Site_Name, Timepoint) <span class="sc">%&gt;%</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">top_date =</span> <span class="fu">names</span>(<span class="fu">which.max</span>(<span class="fu">table</span>(DATE))), <span class="co"># find the most common DATE</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">top_date =</span> <span class="fu">as.Date</span>(top_date)) <span class="sc">%&gt;%</span> <span class="co"># convert it back to a date class since table() returns a character class</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="creating-the-averaged-data" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="creating-the-averaged-data"><span class="header-section-number">4.2</span> Creating the Averaged Data</h3>
+<p>We will be using averages by site and timepoint for the Percent of Living Tissue metric and the LAI metric.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>Average_Metrics <span class="ot">&lt;-</span> Tagged_Metrics <span class="sc">%&gt;%</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Site_Name, Timepoint, top_date) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">N=</span> <span class="fu">n</span>(),</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">Average_PerLive =</span> <span class="fu">mean</span>(Per_Live),</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">SD_PerLive =</span> <span class="fu">sd</span>(Per_Live),</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">Average_LAI =</span> <span class="fu">mean</span>(LAI),</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">SD_LAI =</span> <span class="fu">sd</span>(LAI))</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(Average_Metrics)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 8
+# Groups:   Site_Name, Timepoint [6]
+  Site_Name    Timepoint top_date       N Average_PerLive SD_PerLive Average_LAI
+  &lt;chr&gt;        &lt;chr&gt;     &lt;date&gt;     &lt;int&gt;           &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;
+1 Channel Rock T0        2021-05-16    36           0.968     0.0673      0.0155
+2 Channel Rock T1        2021-10-16    36           0.911     0.245       0.0498
+3 Channel Rock T2        2022-05-22    36           0.924     0.182       0.0683
+4 Channel Rock T3        2022-09-08    36           0.869     0.253       0.0618
+5 Channel Rock T4        2024-02-20    36           0.337     0.382       0.0328
+6 Channel Rock T5        2025-03-04    36           0         0           0     
+# ℹ 1 more variable: SD_LAI &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="creating-the-frequency-data" class="level3" data-number="4.3">
+<h3 data-number="4.3" class="anchored" data-anchor-id="creating-the-frequency-data"><span class="header-section-number">4.3</span> Creating the Frequency Data</h3>
+<p>We will be using counts/proportions of the colonies within binned size categories for each timepoint at each site.</p>
+<p>For easier manipulation of the data, we wil:</p>
+<ol type="1">
+<li><p>generate the counts of each size bin in at each site during each timepoing</p></li>
+<li><p>change the data from a long format to a wide format</p></li>
+<li><p>replace any NAs with zeros</p></li>
+<li><p>calculate the relative proportions of the counts</p></li>
+<li><p>change the data back into a long format for figure creation.</p></li>
+</ol>
+<section id="wide-dataset-with-nas-replaced-with-zeros" class="level4" data-number="4.3.1">
+<h4 data-number="4.3.1" class="anchored" data-anchor-id="wide-dataset-with-nas-replaced-with-zeros"><span class="header-section-number">4.3.1</span> Wide Dataset with NAs Replaced with Zeros</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>SizeBin_Wide <span class="ot">&lt;-</span> Tagged_Metrics <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Site_Name, Timepoint, top_date, Bin) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>( <span class="at">Count=</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">spread</span>( <span class="at">key =</span> Bin, <span class="at">value =</span> Count)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>SizeBin_Wide <span class="ot">&lt;-</span><span class="fu">replace</span>(SizeBin_Wide, <span class="fu">is.na</span>(SizeBin_Wide), <span class="dv">0</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(SizeBin_Wide)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 8
+# Groups:   Site_Name, Timepoint, top_date [6]
+  Site_Name    Timepoint top_date   Bin_0 Bin_1 Bin_2 Bin_3 Bin_4
+  &lt;chr&gt;        &lt;chr&gt;     &lt;date&gt;     &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+1 Channel Rock T0        2021-05-16     0     0    28     6     2
+2 Channel Rock T1        2021-10-16     1     0    23     7     5
+3 Channel Rock T2        2022-05-22     1     0    20    12     3
+4 Channel Rock T3        2022-09-08     2     1    13    16     4
+5 Channel Rock T4        2024-02-20    15     0    10    10     1
+6 Channel Rock T5        2025-03-04    36     0     0     0     0</code></pre>
+</div>
+</div>
+</section>
+<section id="relative-proportions" class="level4" data-number="4.3.2">
+<h4 data-number="4.3.2" class="anchored" data-anchor-id="relative-proportions"><span class="header-section-number">4.3.2</span> Relative Proportions</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>SizeBin_Wide_Prop <span class="ot">&lt;-</span> SizeBin_Wide <span class="sc">%&gt;%</span> </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Sample_Size=</span> <span class="fu">sum</span>(<span class="fu">c_across</span>(<span class="fu">c</span>(<span class="st">"Bin_0"</span>, <span class="st">"Bin_1"</span>, <span class="st">"Bin_2"</span>, <span class="st">"Bin_3"</span>, <span class="st">"Bin_4"</span>)))) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">DeadColonies_Prop =</span> Bin_0<span class="sc">/</span>Sample_Size,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">Bin_1_Prop =</span> Bin_1<span class="sc">/</span>Sample_Size,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">Bin_2_Prop =</span> Bin_2<span class="sc">/</span>Sample_Size,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">Bin_3_Prop =</span> Bin_3<span class="sc">/</span>Sample_Size,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">Bin_4_Prop =</span> Bin_4<span class="sc">/</span>Sample_Size)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(SizeBin_Wide_Prop)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 14
+# Groups:   Site_Name, Timepoint, top_date [6]
+  Site_Name    Timepoint top_date   Bin_0 Bin_1 Bin_2 Bin_3 Bin_4 Sample_Size
+  &lt;chr&gt;        &lt;chr&gt;     &lt;date&gt;     &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;       &lt;int&gt;
+1 Channel Rock T0        2021-05-16     0     0    28     6     2          36
+2 Channel Rock T1        2021-10-16     1     0    23     7     5          36
+3 Channel Rock T2        2022-05-22     1     0    20    12     3          36
+4 Channel Rock T3        2022-09-08     2     1    13    16     4          36
+5 Channel Rock T4        2024-02-20    15     0    10    10     1          36
+6 Channel Rock T5        2025-03-04    36     0     0     0     0          36
+# ℹ 5 more variables: DeadColonies_Prop &lt;dbl&gt;, Bin_1_Prop &lt;dbl&gt;,
+#   Bin_2_Prop &lt;dbl&gt;, Bin_3_Prop &lt;dbl&gt;, Bin_4_Prop &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="long-dataset" class="level4" data-number="4.3.3">
+<h4 data-number="4.3.3" class="anchored" data-anchor-id="long-dataset"><span class="header-section-number">4.3.3</span> Long Dataset</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>SizeBin_Long_Prop <span class="ot">&lt;-</span> SizeBin_Wide_Prop <span class="sc">%&gt;%</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Site_Name, </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>         Timepoint, </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>         top_date, </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>         DeadColonies_Prop, </span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>         Bin_1_Prop, </span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>         Bin_2_Prop, </span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>         Bin_3_Prop, </span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>         Bin_4_Prop) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols=</span> <span class="fu">c</span>(DeadColonies_Prop, </span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>            Bin_1_Prop, </span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>            Bin_2_Prop, </span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>            Bin_3_Prop, </span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>            Bin_4_Prop),</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"Bin"</span>,</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"Prop"</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="figures" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="figures"><span class="header-section-number">5</span> Figures</h2>
+<section id="lai" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="lai"><span class="header-section-number">5.1</span> LAI</h3>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>dodge <span class="ot">&lt;-</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>LAI_Fig <span class="ot">&lt;-</span> Average_Metrics <span class="sc">%&gt;%</span> </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> top_date, </span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> Average_LAI, </span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill =</span> Timepoint))<span class="sc">+</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, </span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">position =</span> dodge)<span class="sc">+</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymax =</span> Average_LAI <span class="sc">+</span> SD_LAI, </span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>                    <span class="at">ymin =</span> Average_LAI <span class="sc">-</span> SD_LAI),</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>                <span class="at">width =</span> <span class="dv">40</span>,</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>                <span class="at">position =</span> dodge)<span class="sc">+</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Site_Name)<span class="sc">+</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#1ABC9C"</span>,</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"#E67E22"</span>,</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"#F1C40F"</span>,</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"#2980B9"</span>,</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"#8E44AD"</span>,</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"#C0392B"</span>)) <span class="sc">+</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">date_labels =</span> <span class="st">"%m/%Y"</span>,</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>               <span class="at">date_breaks =</span> <span class="st">"4 months"</span>)<span class="sc">+</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>))<span class="sc">+</span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Date"</span>,</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Average Living Surface Area (m^2/colony)"</span>)<span class="sc">+</span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>LAI_Fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="TaggedColonyFigures_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1152"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="percent-living-tissue" class="level3" data-number="5.2">
+<h3 data-number="5.2" class="anchored" data-anchor-id="percent-living-tissue"><span class="header-section-number">5.2</span> Percent Living Tissue</h3>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>dodge <span class="ot">&lt;-</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>PerLive_Fig <span class="ot">&lt;-</span> Average_Metrics <span class="sc">%&gt;%</span> </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> top_date, </span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> Average_PerLive, </span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill =</span> Timepoint))<span class="sc">+</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, </span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">position =</span> dodge)<span class="sc">+</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymax =</span> Average_PerLive <span class="sc">+</span> SD_PerLive, </span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>                    <span class="at">ymin =</span> Average_PerLive <span class="sc">-</span> SD_PerLive),</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>                <span class="at">width =</span> <span class="dv">40</span>,</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>                <span class="at">position =</span> dodge)<span class="sc">+</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Site_Name)<span class="sc">+</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#1ABC9C"</span>,</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"#E67E22"</span>,</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"#F1C40F"</span>,</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"#2980B9"</span>,</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"#8E44AD"</span>,</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"#C0392B"</span>)) <span class="sc">+</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">date_labels =</span> <span class="st">"%m/%Y"</span>,</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>               <span class="at">date_breaks =</span> <span class="st">"4 months"</span>)<span class="sc">+</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>  <span class="co">#coord_cartesian(ylim = c(0, 0.5))+</span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Date"</span>,</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Average Percent of Living Tissue on a Colony"</span>)<span class="sc">+</span></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>PerLive_Fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="TaggedColonyFigures_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1152"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="size-1" class="level3" data-number="5.3">
+<h3 data-number="5.3" class="anchored" data-anchor-id="size-1"><span class="header-section-number">5.3</span> Size</h3>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Relabeling and reordering the size bins</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>SizeBin_Long_Prop<span class="sc">$</span>Bin <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(SizeBin_Long_Prop<span class="sc">$</span>Bin)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>SizeBin_Long_Prop<span class="sc">$</span>Bin <span class="ot">&lt;-</span> SizeBin_Long_Prop<span class="sc">$</span>Bin <span class="sc">%&gt;%</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fct_recode</span>(<span class="st">"Small"</span> <span class="ot">=</span> <span class="st">"Bin_1_Prop"</span>, <span class="co"># relabel</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Dead"</span> <span class="ot">=</span> <span class="st">"DeadColonies_Prop"</span>,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Medium"</span> <span class="ot">=</span> <span class="st">"Bin_2_Prop"</span>,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Large"</span> <span class="ot">=</span> <span class="st">"Bin_3_Prop"</span>,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Extra Large"</span> <span class="ot">=</span> <span class="st">"Bin_4_Prop"</span>) <span class="sc">%&gt;%</span>    </span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fct_relevel</span>(<span class="st">"Extra Large"</span>, <span class="co"># reorder</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Large"</span>, </span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Medium"</span>, </span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Small"</span>, </span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Dead"</span>)  </span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>SizeBin_Fig<span class="ot">&lt;-</span>SizeBin_Long_Prop <span class="sc">%&gt;%</span> </span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> top_date, <span class="at">y =</span> Prop, <span class="at">fill =</span> Bin)) <span class="sc">+</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"fill"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#0072B2"</span>,</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"#E69F00"</span>,</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"#009E73"</span>,</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"#CC79A7"</span>,</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"#696969"</span>)) <span class="sc">+</span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Site_Name) <span class="sc">+</span> </span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">date_labels =</span> <span class="st">"%m/%Y"</span>,</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>               <span class="at">date_breaks =</span> <span class="st">"4 months"</span>)<span class="sc">+</span></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Timepoint"</span>,</span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Proportions of All Tagged Colonies"</span>,</span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Colony Size"</span>) <span class="sc">+</span></span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>SizeBin_Fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="TaggedColonyFigures_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1152"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
