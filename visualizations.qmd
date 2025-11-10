@@ -1,8 +1,15 @@
 ---
-title: "metrics"
+page-layout: custom
+sidebar: false
+toc: true
 format: html
 ---
 
+:::::: grid
+::: g-col-2
+:::
+
+::: g-col-6
 ```{r}
 #| label: setup-and-process
 #| message: false
@@ -43,7 +50,101 @@ perc_live_plot <- plot_metric_over_time(
   y_lab = "Mean % Living Tissue (± SE)"
 )
 
-print(lai_plot)
-print(perc_live_plot)
+# ## Mean LAI
+# print(lai_plot)
+# 
+# ## Mean Percent Cover
+# print(perc_live_plot)
+  
 ```
 
+::: {.panel-tabset}
+## LAI
+
+::: {.panel-tabset}
+### All
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+#| out-width: "100%"
+lai_plot
+```
+
+### STJ
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+#| out-width: "100%"
+lai_plot
+```
+
+### STT
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+#| out-width: "100%"
+lai_plot
+```
+
+### STX
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+#| out-width: "100%"
+lai_plot
+```
+
+:::
+
+## Percent Cover
+
+::: {.panel-tabset}
+### All
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+#| out-width: "100%"
+perc_live_plot
+```
+
+### STJ
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+#| out-width: "100%"
+perc_live_plot
+```
+
+### STT
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+#| out-width: "100%"
+perc_live_plot
+```
+
+### STX
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+#| out-width: "100%"
+perc_live_plot
+```
+
+:::
+
+:::
+
+:::
+
+::: g-col-4
+:::
+::::::
