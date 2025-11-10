@@ -1,5 +1,32 @@
 ---
-title: "About"
+page-layout: custom
+sidebar: false
+toc: false
+format: html
+editor: 
+  markdown: 
+    wrap: 72
 ---
 
-About this site
+:::::: grid
+::: g-col-2
+:::
+
+::: g-col-6
+The Acropora Monitoring Program (AMP) is a monitoring program that
+focuses on Acropora palmata populations throughout the U.S. Virgin
+Islands. This program was originally established by Dr. Tyler Smith in
+2011 and ran through 2013 (The report from this monitoring effort can be
+located in the publications section). In 2020, AMP was re- established
+by Dr. Marilyn Brandt and assesses A. palmata populations at nine sites
+across the territory. Each site has 3 permanent radial plots, each 7m in
+radius. Assessments are completed on a biannual to annual basis and
+focus on the size, health, and density of the A. palmata colonies within
+the plots.
+
+![](images/hero-image.JPG){fig-align="center"}
+:::
+
+::: g-col-4
+:::
+::::::
