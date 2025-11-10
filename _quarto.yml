@@ -3,25 +3,26 @@ project:
   output-dir: docs
 
 website:
-  title: "Acropora Monitoring Program"
+  title: "Brandt Lab - AMP"
   navbar:
+    floating: true
     right:
-      - text: "About"
-        href: about.qmd
-      - text: "Site Maps"
-        href: site-maps.qmd
-      - text: "Visualizations"
-        href: visualizations.qmd
-      - text: "Publications"
-        href: publications.qmd
-      - text: "Contact"
-        href: contact.qmd
-        
+      - href: about.qmd
+        text: About
+      - href: visualizations.qmd
+        text: Visualizations
+      - href: publications.qmd
+        text: Publications
+      - href: site-maps.qmd
+        text: Site Maps
+      - href: contact.qmd
+        text: Contact
+
 format:
   html:
     theme:
-      - cosmo
-      - brand
+      light: flatly
+      dark: darkly
     css: styles.css
     toc: true
 

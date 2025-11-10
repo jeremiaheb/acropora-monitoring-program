@@ -1,3 +1,18 @@
 ---
-title: "University of Virgin Islands"
+page-layout: custom
+sidebar: false
+toc: false
+format: html
 ---
+
+:::::: {.hero-banner .grid}
+::::: {.hero-text}
+::: {.hero-title}
+Acropora Monitoring Program
+:::
+
+::: {.hero-subtitle}
+University of the Virgin Islands
+:::
+:::::
+::::::

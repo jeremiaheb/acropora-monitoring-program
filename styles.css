@@ -1,1 +1,86 @@
-/* css styles */
+/* --- Global CSS Reset --- */
+/* THIS IS THE NEW BLOCK TO ADD */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden; /* Prevents horizontal scrollbars */
+  overflow-y: hidden; /* Prevents vertical scrollbars */
+}
+/* -------------------------- */
+
+/* A simple, professional style sheet */
+
+/* Use a clean, readable font */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  font-weight: 400; /* A lighter heading weight */
+}
+
+/* Style the navigation bar */
+.navbar {
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Subtle shadow */
+}
+
+/* Add a little more space to the main container */
+.container, .container-fluid {
+  padding-top: 20px;
+}
+
+/* --- Hero Banner Styles --- */
+
+.hero-banner {
+  height: 100dvh; /* Dynamic viewport height */
+  width: 100%;    /* Full viewport width */
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+
+  /* Path to your local hero image */
+  background-image: url('images/hero-image.JPG');
+  background-size: cover;
+  background-position: center;
+}
+
+/* Adds a dark overlay so white text is more readable */
+.hero-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4); 
+}
+
+/* Container for the text, sits on top of the overlay */
+.hero-text {
+  position: relative; 
+  z-index: 1;
+  padding: 20px;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8); /* Shadow to make text pop */
+}
+
+.hero-title {
+  font-size: 4rem;
+  font-weight: 800; /* Bolder */
+  margin-bottom: 0.5rem;
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  font-weight: 500; /* A bit bolder */
+}
+
+/* Styles for the content *below* the hero banner */
+.content-below-hero {
+  padding-top: 4rem; 
+  padding-bottom: 4rem;
+}
