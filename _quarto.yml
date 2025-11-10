@@ -5,14 +5,18 @@ project:
 website:
   title: "Acropora Monitoring Program"
   navbar:
-    left:
+    right:
       - text: "About"
         href: about.qmd
-      - text: "Metrics"
-        href: metrics.qmd
-      - text: "Distributions"
-        href: distributions.qmd
-
+      - text: "Site Maps"
+        href: site-maps.qmd
+      - text: "Visualizations"
+        href: visualizations.qmd
+      - text: "Publications"
+        href: publications.qmd
+      - text: "Contact"
+        href: contact.qmd
+        
 format:
   html:
     theme:

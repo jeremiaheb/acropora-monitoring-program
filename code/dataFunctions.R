@@ -63,21 +63,21 @@ wrangle_coral_data <- function(raw_data) {
 #' @return A summarized data frame with mean, sd, se, and n_plots for LAI and Percent Live.
 summarize_site_metrics <- function(metrics_data) {
   metrics_data %>%
-    group_by(Site_Name, Timepoint, top_date, Plot_ID) %>%
-    summarise(
-      plot_lai_mean = mean(LAI, na.rm = TRUE),
-      plot_perc_live_mean = mean(Per_Live, na.rm = TRUE),
-      .groups = 'drop'
-    ) %>%
+    # group_by(Site_Name, Timepoint, top_date, Plot_ID) %>%
+    # summarise(
+    #   plot_lai_mean = mean(LAI, na.rm = TRUE),
+    #   plot_perc_live_mean = mean(Per_Live, na.rm = TRUE),
+    #   .groups = 'drop'
+    # ) %>%
     group_by(Site_Name, Timepoint, top_date) %>%
     summarise(
-      LAI_mean = mean(plot_lai_mean, na.rm = TRUE),
-      Perc_Live_mean = mean(plot_perc_live_mean, na.rm = TRUE),
+      LAI_mean = mean(LAI, na.rm = TRUE),
+      Perc_Live_mean = mean(Per_Live, na.rm = TRUE),
       n_plots = n(),
-      LAI_sd = sd(plot_lai_mean, na.rm = TRUE),
-      LAI_se = std.error(plot_lai_mean),
-      Perc_Live_sd = sd(plot_perc_live_mean, na.rm = TRUE),
-      Perc_Live_se = std.error(plot_perc_live_mean),
+      LAI_sd = sd(LAI, na.rm = TRUE),
+      LAI_se = std.error(LAI),
+      Perc_Live_sd = sd(Per_Live, na.rm = TRUE),
+      Perc_Live_se = std.error(Per_Live),
       .groups = 'drop'
     )
 }
