@@ -1,4 +1,18 @@
 ---
 title: "Publications"
-format: html
+toc: false
 ---
+
+## Peer-Reviewed Publications
+
+Here is a list of peer-reviewed journal articles from our program.
+
+- Brandt, Marilyn & Ennis, Rosmin & Meiling, Sonora & Townsend, Joseph & Cobleigh, Kathryn & Glahn, Adam & Quetel, Jason & Brandtneris, Viktor & Henderson, Leslie & Smith, Tyler. (2021). [**The Emergence and Initial Impact of Stony Coral Tissue Loss Disease (SCTLD) in the United States Virgin Islands**](https://doi.org/10.3389/fmars.2021.715329). Frontiers in Marine Science. Volume 8
+
+- Bright, Allan & Rogers, Caroline & Brandt, Marilyn & Muller, E. & Smith, Tyler. (2016). [**Disease Prevalence and Snail Predation Associated with Swell-Generated Damage on the Threatened Coral, *Acropora* palmata (Lamarck)**](https://doi.org/10.3389/fmars.2016.00077). Frontiers in Marine Science. Volume 3
+
+## Reports & Grey Literature
+
+These reports, field guides, and other technical documents are available for direct download.
+
+-   Acroporid Monitoring & Mapping Program of the United States Virgin Islands 2011-2013 (2014). [**PDF Download**](literature/AMMP-STT%20STJ-FinalReport.pdf)
