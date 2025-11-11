@@ -1,10 +1,6 @@
 # Load necessary libraries for data manipulation and visualization.
 # If you don't have them installed, run: install.packages(c("dplyr", "tidyr", "ggplot2", "forcats", "lubridate", "readxl"))
-library(dplyr)
-library(tidyr)
-library(ggplot2)
-library(forcats)
-library(lubridate)
+library(tidyverse)
 library(readxl)
 
 # ==============================================================================
@@ -13,6 +9,22 @@ library(readxl)
 
 # Custom function to calculate standard error
 std.error <- function(x) sd(x, na.rm = TRUE) / sqrt(length(na.omit(x)))
+
+#' Adds an 'Island' column based on Site_Name.
+#'
+#' @param data A data frame containing a 'Site_Name' column.
+#' @return A data frame with a new 'Island' column added.
+add_island_column <- function(data) {
+  data %>%
+    mutate(
+      Island = case_when(
+        Site_Name %in% c("Cow and Calf", "Flat Cay", "Thatch Cay") ~ "St. Thomas",
+        Site_Name %in% c("Yawzi Point", "Reef Bay") ~ "St. John",
+        Site_Name %in% c("White Horse", "Channel Rock", "Llews Reef East", "Llews Reef West") ~ "St. Croix",
+        TRUE ~ NA_character_ # Assign NA to any sites not in the list
+      )
+    )
+}
 
 #' Wrangled raw coral colony data into analysis-ready metrics.
 #'
@@ -79,7 +91,8 @@ summarize_site_metrics <- function(metrics_data) {
       Perc_Live_sd = sd(Per_Live, na.rm = TRUE),
       Perc_Live_se = std.error(Per_Live),
       .groups = 'drop'
-    )
+    ) %>% 
+    add_island_column()
 }
 
 #' Calculates the proportional abundance of each size bin.
@@ -92,7 +105,8 @@ calculate_binned_proportions <- function(metrics_data) {
     complete(nesting(Site_Name, Timepoint, top_date), Bin, fill = list(n = 0)) %>%
     group_by(Site_Name, Timepoint, top_date) %>%
     mutate(Prop = n / sum(n)) %>%
-    ungroup()
+    ungroup() %>% 
+    add_island_column()
 }
 
 #' Creates a line plot of a metric over time, faceted by site.
