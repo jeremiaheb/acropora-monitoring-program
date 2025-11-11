@@ -26,38 +26,8 @@ TaggedColonies <- read_xlsx("data/TaggedColonies.xlsx")
 # Process and summarize the data by calling the functions
 Tagged_Metrics <- wrangle_coral_data(TaggedColonies)
 site_summary <- summarize_site_metrics(Tagged_Metrics)
+binned_proportions <- calculate_binned_proportions(Tagged_Metrics)
 ```
-
-```{r}
-#| message: false
-#| warning: false
-#| echo: false
-#| out-width: "100%"
-
-lai_plot <- plot_metric_over_time(
-  summary_data = site_summary,
-  y_var = LAI_mean,
-  y_se = LAI_se,
-  title = "Mean Live Area Index (LAI) Over Time by Site",
-  y_lab = "Mean LAI (± SE)"
-)
-
-perc_live_plot <- plot_metric_over_time(
-  summary_data = site_summary,
-  y_var = Perc_Live_mean,
-  y_se = Perc_Live_se,
-  title = "Mean Percent Living Tissue Over Time by Site",
-  y_lab = "Mean % Living Tissue (± SE)"
-)
-
-# ## Mean LAI
-# print(lai_plot)
-# 
-# ## Mean Percent Cover
-# print(perc_live_plot)
-  
-```
-
 ::: {.panel-tabset}
 ## LAI
 
@@ -68,34 +38,68 @@ perc_live_plot <- plot_metric_over_time(
 #| warning: false
 #| echo: false
 #| out-width: "100%"
-lai_plot
+
+plot_metric_over_time(
+  summary_data = site_summary,
+  y_var = LAI_mean,
+  y_se = LAI_se,
+  title = "Mean Live Area Index (LAI) Over Time by Site",
+  y_lab = "Mean LAI (± SE)"
+)
 ```
 
-### STJ
+### St. Thomas
 ```{r}
 #| message: false
 #| warning: false
 #| echo: false
 #| out-width: "100%"
-lai_plot
+
+site_summary %>%
+  filter(Island == "St. Thomas") %>%
+  plot_metric_over_time(
+    summary_data = .,
+    y_var = LAI_mean,
+    y_se = LAI_se,
+    title = "Mean Live Area Index (LAI) Over Time by Site",
+    y_lab = "Mean LAI (± SE)"
+  )
 ```
 
-### STT
+### St. John
 ```{r}
 #| message: false
 #| warning: false
 #| echo: false
 #| out-width: "100%"
-lai_plot
+
+site_summary %>%
+  filter(Island == "St. John") %>%
+  plot_metric_over_time(
+    summary_data = .,
+    y_var = LAI_mean,
+    y_se = LAI_se,
+    title = "Mean Live Area Index (LAI) Over Time by Site",
+    y_lab = "Mean LAI (± SE)"
+  )
 ```
 
-### STX
+### St. Croix
 ```{r}
 #| message: false
 #| warning: false
 #| echo: false
 #| out-width: "100%"
-lai_plot
+
+site_summary %>%
+  filter(Island == "St. Croix") %>%
+  plot_metric_over_time(
+    summary_data = .,
+    y_var = LAI_mean,
+    y_se = LAI_se,
+    title = "Mean Live Area Index (LAI) Over Time by Site",
+    y_lab = "Mean LAI (± SE)"
+  )
 ```
 
 :::
@@ -109,34 +113,119 @@ lai_plot
 #| warning: false
 #| echo: false
 #| out-width: "100%"
-perc_live_plot
+
+plot_metric_over_time(
+  summary_data = site_summary,
+  y_var = Perc_Live_mean,
+  y_se = Perc_Live_se,
+  title = "Mean Percent Living Tissue Over Time by Site",
+  y_lab = "Mean % Living Tissue (± SE)"
+)
 ```
 
-### STJ
+### St. Thomas
 ```{r}
 #| message: false
 #| warning: false
 #| echo: false
 #| out-width: "100%"
-perc_live_plot
+
+site_summary %>%
+  filter(Island == "St. Thomas") %>%
+  plot_metric_over_time(
+    summary_data = .,
+    y_var = Perc_Live_mean,
+    y_se = Perc_Live_se,
+    title = "Mean Percent Living Tissue Over Time by Site",
+    y_lab = "Mean % Living Tissue (± SE)"
+  )
 ```
 
-### STT
+### St. John
 ```{r}
 #| message: false
 #| warning: false
 #| echo: false
 #| out-width: "100%"
-perc_live_plot
+
+site_summary %>%
+  filter(Island == "St. John") %>%
+  plot_metric_over_time(
+    summary_data = .,
+    y_var = Perc_Live_mean,
+    y_se = Perc_Live_se,
+    title = "Mean Percent Living Tissue Over Time by Site",
+    y_lab = "Mean % Living Tissue (± SE)"
+  )
 ```
 
-### STX
+### St. Croix
 ```{r}
 #| message: false
 #| warning: false
 #| echo: false
 #| out-width: "100%"
-perc_live_plot
+
+site_summary %>%
+  filter(Island == "St. Croix") %>%
+  plot_metric_over_time(
+    summary_data = .,
+    y_var = Perc_Live_mean,
+    y_se = Perc_Live_se,
+    title = "Mean Percent Living Tissue Over Time by Site",
+    y_lab = "Mean % Living Tissue (± SE)"
+  )
+```
+
+:::
+
+## Distributions
+
+::: {.panel-tabset}
+### All
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+#| out-width: "100%"
+
+plot_size_distribution(binned_proportions)
+```
+
+### St. Thomas
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+#| out-width: "100%"
+
+binned_proportions %>%
+  filter(Island == "St. Thomas") %>%
+  plot_size_distribution(.)
+```
+
+### St. John
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+#| out-width: "100%"
+
+binned_proportions %>%
+  filter(Island == "St. John") %>%
+  plot_size_distribution(.)
+```
+
+### St. Croix
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+#| out-width: "100%"
+
+binned_proportions %>%
+  filter(Island == "St. Croix") %>%
+  plot_size_distribution(.)
 ```
 
 :::
