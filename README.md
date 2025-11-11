@@ -27,3 +27,14 @@ That's it\! Your project library is now set up and matches the one used by the r
 If you pull changes from Git and see that the `renv.lock` file has been updated, it means a package was added or changed.
 
 Just run `renv::restore()` again to sync your library with the new lockfile.
+
+If you install an additional package to use in the project you need to tell `renv` to save this new dependency to the "recipe" for your project.
+
+The process is:
+
+1.  **Install your package** as usual (e.g., `install.packages("leaflet")`).
+2.  **Run `renv::snapshot()`** in your R console.
+
+This second step is crucial. `renv::snapshot()` will scan your project, see the new package, and add it to your `renv.lock` file.
+
+After you do this, you must **commit the updated `renv.lock` file** to Git. This is how your colleague, after pulling your changes, will be able to run `renv::restore()` and get the new package you added.
