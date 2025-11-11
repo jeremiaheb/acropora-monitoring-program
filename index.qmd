@@ -5,6 +5,12 @@ toc: false
 format: html
 ---
 
+<style>
+html, body {
+  overflow-y: hidden; 
+}
+</style>
+
 :::::: {.hero-banner .grid}
 ::::: {.hero-text}
 ::: {.hero-title}
