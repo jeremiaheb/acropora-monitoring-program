@@ -1,5 +1,92 @@
 ---
-title: "site-maps"
+page-layout: custom
+sidebar: false
+toc: false
 format: html
 ---
 
+:::::: grid
+::: g-col-2
+:::
+
+::: g-col-8
+
+**Site Map**
+
+```{r}
+#| label: load-map-data
+#| echo: false
+#| message: false
+#| warning: false
+
+library(leaflet)
+library(leaflet.providers)
+library(readxl)
+library(htmlwidgets) # <-- Still needed
+library(htmltools)
+library(dplyr)
+
+# Read in your site metadata
+site_data <- read_excel("data/SiteMetadata.xlsx") %>%
+  mutate(
+    # Create a web-safe filename (replaces " " with "_")
+    image_file = gsub(" ", "_", Site_Name),
+    
+    # Create the custom HTML string for the popup
+    popup_html = sprintf(
+      '<div style="display: flex; align-items: flex-start;">
+         
+         <div style="width: 280px; padding-right: 10px;">
+           <strong>%s</strong><br>
+           --------------------<br>
+           <strong>Lat:</strong> %s<br>
+           <strong>Lon:</strong> %s<br>
+           <strong>Depth:</strong> %s m<br><br>
+           <p style="margin: 0; white-space: normal; word-wrap: break-word;">%s</p>
+         </div>
+         
+         <div style="width: 350px;">
+           <img src="images/%s.JPG" width="350" alt="Photo of %s">
+         </div>
+       </div>',
+      Site_Name,
+      lat,
+      lon,
+      depth,
+      description,
+      image_file,
+      Site_Name
+    )
+  )
+```
+
+```{r}
+#| label: create-map
+#| echo: false
+#| message: false
+#| warning: false
+
+leaflet(data = site_data) %>%
+  setView(lng = -64.74905, lat = 18.03805, zoom = 9) %>% 
+  addProviderTiles("Esri.WorldTopoMap") %>%
+  addMarkers(
+    lng = ~lon,
+    lat = ~lat,
+    popup = ~lapply(popup_html, HTML),
+    popupOptions = popupOptions(maxWidth = 650),
+    label = ~Site_Name,
+    labelOptions = labelOptions(
+      noHide = TRUE,
+      textOnly = TRUE,
+      textsize = "12px",
+      direction = 'right',
+      offset = c(10, 0)
+    )
+  )
+```
+
+:::
+
+::: g-col-2
+:::
+::::::
