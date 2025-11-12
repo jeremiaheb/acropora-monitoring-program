@@ -1,5 +1,6 @@
 library(tidyverse)
 library(readxl)
+library(plotly)
 
 
 # Define custom function first
@@ -107,7 +108,7 @@ Perc_Live_plot <- ggplot(site_summary, aes(x = top_date, y = Perc_Live_mean, gro
     date_labels = "%b %Y"
   ) +
   scale_color_viridis_d() +
-  facet_wrap(~ Site_Name, scales = "free") +
+  facet_wrap(~ Site_Name) +
   labs(
     title = "Mean Percent Living Tissue Over Time by Site",
     subtitle = "Error bars represent standard error of plot means",
@@ -190,3 +191,122 @@ SizeBin_Fig <- binned_proportions %>%
     legend.position = "bottom"
   )
 
+
+# Make sure you have plotly installed: install.packages("plotly")
+library(plotly)
+
+#' Creates an INTERACTIVE line plot of a metric over time, faceted by site.
+#'
+#' @param summary_data The data frame from summarize_site_metrics().
+#' @param y_var The column to plot on the y-axis (e.g., LAI_mean).
+#' @param y_se The column for the standard error of the y_var.
+#' @param title The main title for the plot.
+#' @param y_lab The label for the y-axis.
+#' @return A plotly object.
+plot_metric_over_time_interactive <- function(summary_data, y_var, y_se, title, y_lab) {
+  
+  # Get a list of unique sites to iterate over
+  sites <- unique(summary_data$Site_Name)
+  
+  # Create a list to hold each site's plot
+  plot_list <- list()
+  
+  # --- Loop through each site and create a plot ---
+  for (i in seq_along(sites)) {
+    
+    current_site <- sites[i]
+    
+    # Filter data for the current site
+    site_data <- summary_data %>%
+      filter(Site_Name == current_site)
+    
+    # Create the plot for this site
+    p <- plot_ly(data = site_data, x = ~top_date) %>%
+      
+      # Add the line (as a separate trace)
+      add_lines(
+        y = ~{{y_var}},
+        color = I("gray50"),  # I() sets a literal color
+        name = "Mean",
+        legendgroup = "mean"
+      ) %>%
+      
+      # Add the error bars
+      # This adds a trace for the error bars *without* points
+      add_trace(
+        y = ~{{y_var}},
+        mode = "markers", # We use 'markers' but make them invisible
+        marker = list(opacity = 0), # Invisible markers
+        name = "Error",
+        legendgroup = "error",
+        error_y = list(
+          type = "data",
+          array = ~{{y_se}},
+          color = "darkgray"
+        )
+      ) %>%
+      
+      # Add the points (colored by Timepoint)
+      add_markers(
+        y = ~{{y_var}},
+        color = ~Timepoint,  # Color by Timepoint
+        colors = "viridis",  # Use viridis palette
+        name = "Timepoint",
+        legendgroup = "points"
+      ) %>%
+      
+      # Add the "facet" title for this subplot
+      add_annotations(
+        text = paste("<b>", current_site, "</b>"),
+        x = 0.5,
+        y = 1.1,
+        xref = "paper",
+        yref = "paper",
+        xanchor = "center",
+        yanchor = "top",
+        showarrow = FALSE,
+        font = list(size = 14)
+      )
+    
+    # Add the plot to our list
+    plot_list[[i]] <- p
+  }
+  
+  # --- Combine all plots into a subplot grid ---
+  
+  # Determine the number of columns (aim for a squarish grid)
+  n_cols <- ceiling(sqrt(length(sites)))
+  
+  # The main subplot call
+  fig <- subplot(
+    plot_list,
+    nrows = n_cols,
+    shareX = TRUE,  # Share X-axis for all plots
+    shareY = FALSE  # "scales = 'free'" means we DON'T share Y
+  ) %>%
+    
+    # --- Add final layout touches ---
+    layout(
+      title = list(text = title, x = 0.5, font = list(size = 18)),
+      xaxis = list(title = "Date"),
+      yaxis = list(title = y_lab),
+      template = "plotly_white", # Similar to theme_bw()
+      
+      # Fix the legend (can get messy with subplots)
+      # This shows one legend for all plots
+      showlegend = TRUE
+    )
+  
+  return(fig)
+}
+
+p <- site_summary %>%
+  add_island_column() %>%
+  # filter(Island == "St. Thomas") %>% 
+  plot_metric_over_time(
+    summary_data = .,
+    y_var = Perc_Live_mean,
+    y_se = Perc_Live_se,
+    title = "Mean Percent Living Tissue Over Time by Site",
+    y_lab = "Mean % Living Tissue (± SE)"
+  )
