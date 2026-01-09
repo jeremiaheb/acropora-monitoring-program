@@ -128,7 +128,7 @@ plot_metric_over_time <- function(summary_data, y_var, y_se, title, y_lab) {
     geom_point(aes(color = Timepoint), size = 4, alpha = 0.8) +
     scale_x_date(date_breaks = "4 months", date_labels = "%b %Y") +
     scale_color_viridis_d() +
-    facet_wrap(~ Site_Name, scales = "free") +
+    facet_wrap(~ Site_Name, scales = "fixed") +
     labs(
       title = title,
       x = "Date",
